@@ -1271,7 +1271,7 @@ export default function Island() {
         position: 'fixed',
         margin: 0,
         transition: 'box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        pointerEvents: isTransitioning ? 'auto' : (window.electronAPI?.platform === 'linux' && mode === 'still' && !isHovered) ? 'none' : 'auto'
+        pointerEvents: isTransitioning ? 'auto' : (window.electronAPI?.platform === 'linux' && mode === 'still' && !isHovered) ? 'auto' : 'auto'
       }}
     >
       {/*Quickview*/}
