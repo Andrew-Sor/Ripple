@@ -260,17 +260,27 @@ function launchWindows(input) {
     exec(`start "" ${trimmed}`);
   }
 }
-
+// otsudogo
 ipcMain.handle("set-ignore-mouse-events", (event, ignore, forward) => {
   if (mainWindow) {
-    if (process.platform !== "linux") {
-      mainWindow.setIgnoreMouseEvents(ignore, { forward: forward || false });
-    } else {
+    if (process.platform === "linux") {
+      // На Linux используем X11-совместимое решение с WM_HINTS
       mainWindow.setIgnoreMouseEvents(ignore);
+      if (!ignore && process.platform === "linux") {
+        // Пробиваем область для клика через нативный API
+        const { execSync } = require('child_process');
+        try {
+          execSync(`wmctrl -i -r ${mainWindow.id} -b add,skip_taskbar,skip_pager`);
+        } catch (e) {
+          // wmctrl может быть недоступен
+        }
+      }
+    } else {
+      mainWindow.setIgnoreMouseEvents(ignore, { forward: forward || false });
     }
   }
 });
-
+// dosudogo
 ipcMain.handle("focus-window", () => {
   if (mainWindow) {
     mainWindow.focus();
