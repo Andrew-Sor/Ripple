@@ -11,7 +11,7 @@ const {
 } = require("electron");
 const path = require("node:path");
 const fs = require("fs");
-
+// pusto
 if (process.platform === "linux") {
   app.commandLine.appendSwitch("enable-transparent-visuals");
   app.commandLine.appendSwitch("disable-gpu-compositing");
